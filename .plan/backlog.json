@@ -12,9 +12,10 @@
       "fingerprint": "spec|spec-001|epic|e001-video-ingestion",
       "source": "/pro:spec.import",
       "sourceSpec": "spec-001",
-      "sourceBranch": null,
+      "sourceBranch": "mvp/scenesplit",
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "status": "open"
+      "status": "resolved",
+      "resolvedAt": "2026-01-01T00:00:00.000Z"
     },
     {
       "id": 2,
@@ -27,9 +28,10 @@
       "fingerprint": "spec|spec-001|epic|e002-semantic-embedding",
       "source": "/pro:spec.import",
       "sourceSpec": "spec-001",
-      "sourceBranch": null,
+      "sourceBranch": "mvp/scenesplit",
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "status": "open"
+      "status": "resolved",
+      "resolvedAt": "2026-01-01T00:00:00.000Z"
     },
     {
       "id": 3,
@@ -42,9 +44,10 @@
       "fingerprint": "spec|spec-001|epic|e003-frame-selection",
       "source": "/pro:spec.import",
       "sourceSpec": "spec-001",
-      "sourceBranch": null,
+      "sourceBranch": "mvp/scenesplit",
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "status": "open"
+      "status": "resolved",
+      "resolvedAt": "2026-01-01T00:00:00.000Z"
     },
     {
       "id": 4,
@@ -57,9 +60,10 @@
       "fingerprint": "spec|spec-001|epic|e004-cli-interface",
       "source": "/pro:spec.import",
       "sourceSpec": "spec-001",
-      "sourceBranch": null,
+      "sourceBranch": "mvp/scenesplit",
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "status": "open"
+      "status": "resolved",
+      "resolvedAt": "2026-01-01T00:00:00.000Z"
     },
     {
       "id": 5,
@@ -117,9 +121,10 @@
       "fingerprint": "spec|spec-001|story|us001-video-input",
       "source": "/pro:spec.import",
       "sourceSpec": "spec-001",
-      "sourceBranch": null,
+      "sourceBranch": "mvp/scenesplit",
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "status": "open"
+      "status": "resolved",
+      "resolvedAt": "2026-01-01T00:00:00.000Z"
     },
     {
       "id": 9,
@@ -132,9 +137,10 @@
       "fingerprint": "spec|spec-001|story|us002-semantic-grouping",
       "source": "/pro:spec.import",
       "sourceSpec": "spec-001",
-      "sourceBranch": null,
+      "sourceBranch": "mvp/scenesplit",
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "status": "open"
+      "status": "resolved",
+      "resolvedAt": "2026-01-01T00:00:00.000Z"
     },
     {
       "id": 10,
@@ -147,9 +153,10 @@
       "fingerprint": "spec|spec-001|story|us003-frame-selection",
       "source": "/pro:spec.import",
       "sourceSpec": "spec-001",
-      "sourceBranch": null,
+      "sourceBranch": "mvp/scenesplit",
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "status": "open"
+      "status": "resolved",
+      "resolvedAt": "2026-01-01T00:00:00.000Z"
     },
     {
       "id": 11,
@@ -162,9 +169,10 @@
       "fingerprint": "spec|spec-001|story|us004-detail-flag",
       "source": "/pro:spec.import",
       "sourceSpec": "spec-001",
-      "sourceBranch": null,
+      "sourceBranch": "mvp/scenesplit",
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "status": "open"
+      "status": "resolved",
+      "resolvedAt": "2026-01-01T00:00:00.000Z"
     },
     {
       "id": 12,
@@ -177,9 +185,10 @@
       "fingerprint": "spec|spec-001|story|us005-quality-flag",
       "source": "/pro:spec.import",
       "sourceSpec": "spec-001",
-      "sourceBranch": null,
+      "sourceBranch": "mvp/scenesplit",
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "status": "open"
+      "status": "resolved",
+      "resolvedAt": "2026-01-01T00:00:00.000Z"
     },
     {
       "id": 13,
