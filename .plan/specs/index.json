@@ -1,0 +1,16 @@
+{
+  "lastSequence": 1,
+  "specs": [
+    {
+      "id": "spec-001",
+      "title": "SceneSplit PRD v1.0 MVP",
+      "filename": "spec-001-scenesplit-prd.md",
+      "source": "clipboard",
+      "importedAt": "2026-01-01T00:00:00.000Z",
+      "extractedItems": {
+        "epics": 7,
+        "stories": 6
+      }
+    }
+  ]
+}
