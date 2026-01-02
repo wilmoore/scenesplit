@@ -3,6 +3,7 @@
 mod config;
 mod embeddings;
 mod error;
+mod model;
 mod output;
 mod processor;
 mod segmentation;
@@ -15,6 +16,7 @@ use clap::Parser;
 
 use config::{DetailLevel, QualityPreset};
 use error::Error;
+use model::ensure_model;
 use processor::SceneSplitProcessor;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -29,16 +31,16 @@ const VERSION: &str = env!("CARGO_PKG_VERSION");
 #[command(version = VERSION)]
 #[command(about = "Extract semantically distinct still images from video")]
 #[command(
-    long_about = "SceneSplit analyzes a video file and extracts representative frames that\ncapture meaningful visual changes. Output is written to a directory\ncontaining numbered images and a metadata.json file."
+    long_about = "SceneSplit analyzes a video file and extracts representative frames that\ncapture meaningful visual changes. Output is written to a directory\ncontaining numbered images and a metadata.json file.\n\nOn first run, the embedding model (~100MB) is downloaded and cached."
 )]
 struct Args {
     /// Path to the input video file
     #[arg(value_name = "VIDEO")]
     input_video: PathBuf,
 
-    /// Path to the ONNX model file (ResNet50 or similar feature extractor)
+    /// Path to a custom ONNX model file (default: auto-download ResNet50)
     #[arg(long, short = 'm', value_name = "MODEL")]
-    model: PathBuf,
+    model: Option<PathBuf>,
 
     /// Granularity level: 'key' (minimal), 'summary' (moderate), 'all' (comprehensive)
     #[arg(long, short = 'd', default_value = "summary", value_enum)]
@@ -71,18 +73,24 @@ fn run(args: Args) -> Result<(), Error> {
         return Err(Error::VideoNotFound(args.input_video));
     }
 
-    // Validate model file exists
-    if !args.model.exists() {
-        return Err(Error::ModelLoad(format!(
-            "Model file not found: {}",
-            args.model.display()
-        )));
-    }
+    // Get model path (user-provided or auto-download)
+    let model_path = match args.model {
+        Some(path) => {
+            if !path.exists() {
+                return Err(Error::ModelLoad(format!(
+                    "Model file not found: {}",
+                    path.display()
+                )));
+            }
+            path
+        }
+        None => ensure_model(args.quiet)?,
+    };
 
     if !args.quiet {
         println!("SceneSplit v{}", VERSION);
         println!("Input: {}", args.input_video.display());
-        println!("Model: {}", args.model.display());
+        println!("Model: {}", model_path.display());
         println!("Detail: {:?}", args.detail);
         println!("Quality: {:?}", args.quality);
         println!();
@@ -92,7 +100,7 @@ fn run(args: Args) -> Result<(), Error> {
         args.detail,
         args.quality,
         args.output,
-        args.model,
+        model_path,
     );
 
     let callback = if args.quiet {
