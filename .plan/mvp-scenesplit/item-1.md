@@ -3,9 +3,9 @@
 ## Description
 E-001: Video ingestion and decoding. Enable SceneSplit to accept local video files as input and decode them offline without network access. Must surface errors for unsupported formats.
 
-## Implementation Approach
-1. Use Python with OpenCV for video decoding (offline, no network)
-2. Create a VideoLoader class that handles:
+## Implementation (Rust)
+1. Use `opencv` crate for video decoding (offline, no network)
+2. Create a `VideoLoader` struct that handles:
    - Opening video files
    - Validating format support
    - Extracting frames at configurable intervals
