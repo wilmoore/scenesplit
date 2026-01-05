@@ -2,8 +2,8 @@
 
 use std::path::Path;
 
-use ndarray::{s, Array, Array1, Array4, Axis};
-use ort::{GraphOptimizationLevel, Session};
+use ndarray::{s, Array4};
+use ort::session::{builder::GraphOptimizationLevel, Session};
 
 use crate::config::QualityPreset;
 use crate::error::{Error, Result};
@@ -107,18 +107,18 @@ impl EmbeddingModel {
     }
 
     /// Compute the embedding for a single frame.
-    pub fn compute_embedding(&self, frame: &Frame) -> Result<EmbeddedFrame> {
+    pub fn compute_embedding(&mut self, frame: &Frame) -> Result<EmbeddedFrame> {
         let input = self.preprocess_frame(frame)?;
-        let outputs = self.session.run(ort::inputs![input]?)?;
+        let input_value = ort::value::Tensor::from_array(input)?;
+        let outputs = self.session.run(ort::inputs![input_value])?;
 
-        // Get the output tensor
-        let output = outputs[0]
+        // Get the output tensor - new API returns (shape, data) tuple
+        let (_, data) = outputs[0]
             .try_extract_tensor::<f32>()
             .map_err(|e| Error::Embedding(format!("Failed to extract embedding: {}", e)))?;
 
         // Flatten and normalize
-        let view = output.view();
-        let flat: Vec<f32> = view.iter().cloned().collect();
+        let flat: Vec<f32> = data.iter().cloned().collect();
         let embedding = normalize_vector(&flat);
 
         Ok(EmbeddedFrame {
@@ -129,7 +129,7 @@ impl EmbeddingModel {
 
     /// Compute embeddings for a batch of frames.
     pub fn compute_embeddings_batch<F>(
-        &self,
+        &mut self,
         frames: &[Frame],
         mut progress_callback: Option<F>,
     ) -> Result<Vec<EmbeddedFrame>>
@@ -154,18 +154,21 @@ impl EmbeddingModel {
                     .assign(&preprocessed.slice(s![0, .., .., ..]));
             }
 
-            let outputs = self.session.run(ort::inputs![batch_tensor]?)?;
+            let batch_value = ort::value::Tensor::from_array(batch_tensor)?;
+            let outputs = self.session.run(ort::inputs![batch_value])?;
 
-            let output = outputs[0]
+            let (shape, data) = outputs[0]
                 .try_extract_tensor::<f32>()
                 .map_err(|e| Error::Embedding(format!("Failed to extract embeddings: {}", e)))?;
 
-            let view = output.view();
+            // Calculate embedding size from shape (batch_size, embedding_dim, ...)
+            let embedding_size = shape.iter().skip(1).product::<i64>() as usize;
 
             // Extract individual embeddings from batch output
             for (i, frame) in chunk.iter().enumerate() {
-                let embedding_slice = view.index_axis(Axis(0), i);
-                let flat: Vec<f32> = embedding_slice.iter().cloned().collect();
+                let start = i * embedding_size;
+                let end = start + embedding_size;
+                let flat: Vec<f32> = data.iter().skip(start).take(embedding_size).cloned().collect();
                 let embedding = normalize_vector(&flat);
 
                 results.push(EmbeddedFrame {

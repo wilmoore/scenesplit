@@ -74,7 +74,7 @@ impl SceneSplitProcessor {
 
         // Stage 3: Compute embeddings
         Self::report_progress(&mut progress_callback, "Computing embeddings", 1, 4);
-        let embedding_model = EmbeddingModel::new(&self.model_path, self.quality)?;
+        let mut embedding_model = EmbeddingModel::new(&self.model_path, self.quality)?;
         let embedded_frames =
             embedding_model.compute_embeddings_batch::<fn(usize, usize)>(&frames, None)?;
 

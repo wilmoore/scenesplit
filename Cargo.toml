@@ -14,14 +14,14 @@ categories = ["command-line-utilities", "multimedia::video"]
 clap = { version = "4.4", features = ["derive"] }
 
 # Video processing
-opencv = { version = "0.92", default-features = false, features = ["videoio", "imgcodecs", "imgproc"] }
+opencv = { version = "0.98", default-features = false, features = ["videoio", "imgcodecs", "imgproc"] }
 
 # ML inference
 ort = { version = "2.0.0-rc.9", default-features = false, features = ["load-dynamic"] }
 ndarray = "0.16"
 
 # Image processing
-image = "0.25"
+image = "0.24"
 
 # Utilities
 thiserror = "2.0"
