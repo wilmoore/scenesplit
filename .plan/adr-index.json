@@ -1,0 +1,13 @@
+{
+  "lastSequence": 3,
+  "entries": [
+    {
+      "branch": "mvp/scenesplit",
+      "adrs": [
+        "001-use-rust-for-implementation.md",
+        "002-use-onnx-runtime-for-ml-inference.md",
+        "003-auto-download-model-on-first-run.md"
+      ]
+    }
+  ]
+}
