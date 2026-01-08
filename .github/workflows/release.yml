@@ -37,7 +37,8 @@ jobs:
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
         run: |
-          brew install opencv onnxruntime pkg-config
+          brew install opencv onnxruntime pkg-config llvm
+          echo "LIBCLANG_PATH=$(brew --prefix llvm)/lib" >> $GITHUB_ENV
 
       - name: Install dependencies (Linux)
         if: runner.os == 'Linux'

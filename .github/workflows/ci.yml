@@ -21,7 +21,9 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Install dependencies
-        run: brew install opencv onnxruntime pkg-config
+        run: |
+          brew install opencv onnxruntime pkg-config llvm
+          echo "LIBCLANG_PATH=$(brew --prefix llvm)/lib" >> $GITHUB_ENV
 
       - name: Check formatting
         run: cargo fmt --check
