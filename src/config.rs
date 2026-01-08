@@ -12,11 +12,12 @@ pub const OUTPUT_IMAGE_FORMAT: &str = "jpg";
 pub const OUTPUT_IMAGE_QUALITY: i32 = 95;
 
 /// Detail level controlling extraction granularity.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, ValueEnum)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default, ValueEnum)]
 pub enum DetailLevel {
     /// Minimal: only major scene changes (5-10 frames for long video)
     Key,
     /// Moderate: representative frames (10-20 frames)
+    #[default]
     Summary,
     /// Comprehensive: all detected semantic changes (20-30 frames)
     All,
@@ -45,18 +46,13 @@ impl DetailLevel {
     }
 }
 
-impl Default for DetailLevel {
-    fn default() -> Self {
-        DetailLevel::Summary
-    }
-}
-
 /// Quality preset affecting processing fidelity and speed.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, ValueEnum)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default, ValueEnum)]
 pub enum QualityPreset {
     /// Quick processing, lower fidelity
     Fast,
     /// Default: good balance
+    #[default]
     Balanced,
     /// Highest quality, slower
     Best,
@@ -88,11 +84,5 @@ impl QualityPreset {
             QualityPreset::Balanced => 0.75,
             QualityPreset::Best => 1.0,
         }
-    }
-}
-
-impl Default for QualityPreset {
-    fn default() -> Self {
-        QualityPreset::Balanced
     }
 }

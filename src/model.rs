@@ -17,9 +17,8 @@ const MODEL_FILENAME: &str = "resnet50-v2-7.onnx";
 
 /// Get the cache directory for SceneSplit.
 fn cache_dir() -> Result<PathBuf> {
-    let base = dirs::cache_dir().ok_or_else(|| {
-        Error::ModelLoad("Could not determine cache directory".to_string())
-    })?;
+    let base = dirs::cache_dir()
+        .ok_or_else(|| Error::ModelLoad("Could not determine cache directory".to_string()))?;
     Ok(base.join("scenesplit"))
 }
 
@@ -35,9 +34,8 @@ pub fn ensure_model(quiet: bool) -> Result<PathBuf> {
     }
 
     // Create cache directory
-    fs::create_dir_all(&cache).map_err(|e| {
-        Error::ModelLoad(format!("Failed to create cache directory: {}", e))
-    })?;
+    fs::create_dir_all(&cache)
+        .map_err(|e| Error::ModelLoad(format!("Failed to create cache directory: {}", e)))?;
 
     if !quiet {
         eprintln!("Downloading model (one-time, ~100MB)...");
@@ -50,9 +48,9 @@ pub fn ensure_model(quiet: bool) -> Result<PathBuf> {
 
 /// Download the model file with progress indication.
 fn download_model(url: &str, dest: &PathBuf, quiet: bool) -> Result<()> {
-    let response = ureq::get(url).call().map_err(|e| {
-        Error::ModelLoad(format!("Failed to download model: {}", e))
-    })?;
+    let response = ureq::get(url)
+        .call()
+        .map_err(|e| Error::ModelLoad(format!("Failed to download model: {}", e)))?;
 
     let total_size = response
         .header("Content-Length")
@@ -74,26 +72,24 @@ fn download_model(url: &str, dest: &PathBuf, quiet: bool) -> Result<()> {
 
     // Download to temporary file first (atomic write)
     let temp_path = dest.with_extension("tmp");
-    let mut file = File::create(&temp_path).map_err(|e| {
-        Error::ModelLoad(format!("Failed to create temp file: {}", e))
-    })?;
+    let mut file = File::create(&temp_path)
+        .map_err(|e| Error::ModelLoad(format!("Failed to create temp file: {}", e)))?;
 
     let mut reader = response.into_reader();
     let mut buffer = [0u8; 8192];
     let mut downloaded: u64 = 0;
 
     loop {
-        let bytes_read = reader.read(&mut buffer).map_err(|e| {
-            Error::ModelLoad(format!("Failed to read response: {}", e))
-        })?;
+        let bytes_read = reader
+            .read(&mut buffer)
+            .map_err(|e| Error::ModelLoad(format!("Failed to read response: {}", e)))?;
 
         if bytes_read == 0 {
             break;
         }
 
-        file.write_all(&buffer[..bytes_read]).map_err(|e| {
-            Error::ModelLoad(format!("Failed to write to file: {}", e))
-        })?;
+        file.write_all(&buffer[..bytes_read])
+            .map_err(|e| Error::ModelLoad(format!("Failed to write to file: {}", e)))?;
 
         downloaded += bytes_read as u64;
 
@@ -107,9 +103,8 @@ fn download_model(url: &str, dest: &PathBuf, quiet: bool) -> Result<()> {
     }
 
     // Atomic rename
-    fs::rename(&temp_path, dest).map_err(|e| {
-        Error::ModelLoad(format!("Failed to move model to cache: {}", e))
-    })?;
+    fs::rename(&temp_path, dest)
+        .map_err(|e| Error::ModelLoad(format!("Failed to move model to cache: {}", e)))?;
 
     if !quiet {
         eprintln!("Model cached at: {}", dest.display());
@@ -119,6 +114,7 @@ fn download_model(url: &str, dest: &PathBuf, quiet: bool) -> Result<()> {
 }
 
 /// Get the path where the model would be cached (for display purposes).
+#[allow(dead_code)]
 pub fn model_cache_path() -> Option<PathBuf> {
     cache_dir().ok().map(|c| c.join(MODEL_FILENAME))
 }

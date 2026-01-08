@@ -5,6 +5,7 @@ use crate::embeddings::{cosine_similarity, EmbeddedFrame};
 
 /// A segment of semantically similar frames.
 #[derive(Debug, Clone)]
+#[allow(dead_code)]
 pub struct SemanticSegment {
     pub index: usize,
     pub start_frame_idx: usize,
@@ -15,11 +16,13 @@ pub struct SemanticSegment {
 
 impl SemanticSegment {
     /// Start timestamp in seconds.
+    #[allow(dead_code)]
     pub fn start_timestamp(&self) -> f64 {
         self.representative_frame.timestamp_seconds()
     }
 
     /// Duration of segment in frames.
+    #[allow(dead_code)]
     pub fn duration_frames(&self) -> usize {
         self.end_frame_idx - self.start_frame_idx
     }
@@ -76,7 +79,8 @@ impl SemanticSegmenter {
 
             if is_semantic_change && has_min_frames {
                 // Finalize current segment
-                let segment = self.create_segment(segments.len(), &segment_frames, segment_start_idx);
+                let segment =
+                    self.create_segment(segments.len(), &segment_frames, segment_start_idx);
                 segments.push(segment);
 
                 // Start new segment
@@ -86,8 +90,7 @@ impl SemanticSegmenter {
             } else {
                 segment_frames.push(current_frame);
                 // Update anchor using exponential moving average
-                anchor_embedding =
-                    self.update_anchor(&anchor_embedding, &current_frame.embedding);
+                anchor_embedding = self.update_anchor(&anchor_embedding, &current_frame.embedding);
             }
 
             if let Some(ref mut cb) = progress_callback {
@@ -108,7 +111,7 @@ impl SemanticSegmenter {
         &self,
         index: usize,
         frames: &[&EmbeddedFrame],
-        start_idx: usize,
+        _start_idx: usize,
     ) -> SemanticSegment {
         // Select middle frame as representative (deterministic selection)
         let representative_idx = frames.len() / 2;
@@ -144,6 +147,7 @@ impl SemanticSegmenter {
 }
 
 /// Select representative frames from segments in deterministic order.
+#[allow(dead_code)]
 pub fn deterministic_frame_selection(segments: &[SemanticSegment]) -> Vec<&EmbeddedFrame> {
     let mut sorted_segments: Vec<_> = segments.iter().collect();
     sorted_segments.sort_by_key(|s| s.index);

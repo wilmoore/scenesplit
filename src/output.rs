@@ -72,17 +72,20 @@ impl OutputWriter {
         // Create image from RGB data
         let img: ImageBuffer<Rgb<u8>, Vec<u8>> =
             ImageBuffer::from_raw(frame.width, frame.height, frame.data.clone()).ok_or_else(
-                || Error::Output(format!("Failed to create image buffer for frame {}", frame_number)),
+                || {
+                    Error::Output(format!(
+                        "Failed to create image buffer for frame {}",
+                        frame_number
+                    ))
+                },
             )?;
 
         // Save as JPEG with quality setting
         let file = File::create(&filepath)?;
         let writer = BufWriter::new(file);
 
-        let mut encoder = image::codecs::jpeg::JpegEncoder::new_with_quality(
-            writer,
-            OUTPUT_IMAGE_QUALITY as u8,
-        );
+        let mut encoder =
+            image::codecs::jpeg::JpegEncoder::new_with_quality(writer, OUTPUT_IMAGE_QUALITY as u8);
         encoder
             .encode_image(&img)
             .map_err(|e| Error::Output(format!("Failed to encode frame: {}", e)))?;

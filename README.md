@@ -39,8 +39,34 @@ sudo apt install libopencv-dev
 
 ## Installation
 
+### Pre-built Binaries
+
+Download the latest release for your platform from [Releases](https://github.com/wilmoore/scenesplit/releases):
+
+| Platform | File |
+|----------|------|
+| macOS (Apple Silicon) | `scenesplit-macos-arm64.tar.gz` |
+| macOS (Intel) | `scenesplit-macos-x64.tar.gz` |
+| Linux (x64) | `scenesplit-linux-x64.tar.gz` |
+
 ```bash
-git clone https://github.com/your-org/scenesplit.git
+# macOS (Apple Silicon)
+curl -L https://github.com/wilmoore/scenesplit/releases/latest/download/scenesplit-macos-arm64.tar.gz | tar xz
+sudo mv scenesplit /usr/local/bin/
+
+# macOS (Intel)
+curl -L https://github.com/wilmoore/scenesplit/releases/latest/download/scenesplit-macos-x64.tar.gz | tar xz
+sudo mv scenesplit /usr/local/bin/
+
+# Linux
+curl -L https://github.com/wilmoore/scenesplit/releases/latest/download/scenesplit-linux-x64.tar.gz | tar xz
+sudo mv scenesplit /usr/local/bin/
+```
+
+### Build from Source
+
+```bash
+git clone https://github.com/wilmoore/scenesplit.git
 cd scenesplit
 cargo build --release
 ```
@@ -104,9 +130,9 @@ SceneSplit creates a directory containing:
 
 ```
 scenesplit_output/
-├── frame_001.png
-├── frame_002.png
-├── frame_003.png
+├── 0001.jpg
+├── 0002.jpg
+├── 0003.jpg
 ├── ...
 └── metadata.json
 ```
@@ -116,18 +142,25 @@ scenesplit_output/
 ```json
 {
   "source_video": "video.mp4",
+  "video_duration_seconds": 120.5,
+  "video_frame_count": 3615,
+  "extracted_frames": 12,
   "detail_level": "summary",
   "quality_preset": "balanced",
   "frames": [
     {
-      "filename": "frame_001.png",
+      "filename": "0001.jpg",
+      "segment_index": 0,
       "frame_index": 0,
-      "timestamp_seconds": 0.0
+      "timestamp_seconds": 0.0,
+      "timestamp_formatted": "00:00:00.000"
     },
     {
-      "filename": "frame_002.png",
+      "filename": "0002.jpg",
+      "segment_index": 1,
       "frame_index": 45,
-      "timestamp_seconds": 1.5
+      "timestamp_seconds": 1.5,
+      "timestamp_formatted": "00:00:01.500"
     }
   ]
 }

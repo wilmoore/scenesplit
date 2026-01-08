@@ -12,6 +12,7 @@ use crate::error::{Error, Result, SUPPORTED_FORMATS};
 
 /// Metadata extracted from a video file.
 #[derive(Debug, Clone)]
+#[allow(dead_code)]
 pub struct VideoMetadata {
     pub path: PathBuf,
     pub width: u32,
@@ -34,6 +35,7 @@ pub struct Frame {
 
 impl Frame {
     /// Timestamp in milliseconds.
+    #[allow(dead_code)]
     pub fn timestamp_ms(&self) -> u64 {
         (self.timestamp_seconds * 1000.0) as u64
     }
@@ -164,7 +166,7 @@ impl VideoLoader {
             }
 
             // Only process frames at the sample rate
-            if frame_index % sample_rate == 0 {
+            if frame_index.is_multiple_of(sample_rate) {
                 let timestamp = if fps > 0.0 {
                     frame_index as f64 / fps
                 } else {
@@ -173,7 +175,13 @@ impl VideoLoader {
 
                 // Convert BGR to RGB
                 let mut rgb_mat = Mat::default();
-                imgproc::cvt_color(&frame_mat, &mut rgb_mat, imgproc::COLOR_BGR2RGB, 0, AlgorithmHint::ALGO_HINT_DEFAULT)?;
+                imgproc::cvt_color(
+                    &frame_mat,
+                    &mut rgb_mat,
+                    imgproc::COLOR_BGR2RGB,
+                    0,
+                    AlgorithmHint::ALGO_HINT_DEFAULT,
+                )?;
 
                 // Get frame dimensions
                 let width = rgb_mat.cols() as u32;
@@ -202,6 +210,7 @@ impl VideoLoader {
     }
 
     /// Get a specific frame by index.
+    #[allow(dead_code)]
     pub fn get_frame_at(&mut self, index: usize) -> Result<Frame> {
         let metadata = self.metadata()?.clone();
 
@@ -236,7 +245,13 @@ impl VideoLoader {
 
         // Convert BGR to RGB
         let mut rgb_mat = Mat::default();
-        imgproc::cvt_color(&frame_mat, &mut rgb_mat, imgproc::COLOR_BGR2RGB, 0, AlgorithmHint::ALGO_HINT_DEFAULT)?;
+        imgproc::cvt_color(
+            &frame_mat,
+            &mut rgb_mat,
+            imgproc::COLOR_BGR2RGB,
+            0,
+            AlgorithmHint::ALGO_HINT_DEFAULT,
+        )?;
 
         let width = rgb_mat.cols() as u32;
         let height = rgb_mat.rows() as u32;
@@ -252,6 +267,7 @@ impl VideoLoader {
     }
 
     /// Get the path to the video file.
+    #[allow(dead_code)]
     pub fn path(&self) -> &Path {
         &self.path
     }

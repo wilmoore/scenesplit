@@ -28,6 +28,7 @@ pub enum Error {
 
     /// Error with video capture.
     #[error("Video capture error: {0}")]
+    #[allow(dead_code)]
     VideoCapture(String),
 
     /// Error computing embeddings.

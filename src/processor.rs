@@ -11,6 +11,7 @@ use crate::video::{VideoLoader, VideoMetadata};
 
 /// Result of video processing.
 #[derive(Debug)]
+#[allow(dead_code)]
 pub struct ProcessingResult {
     pub video_metadata: VideoMetadata,
     pub total_frames_processed: usize,
@@ -21,6 +22,7 @@ pub struct ProcessingResult {
 }
 
 /// Progress callback type for processing stages.
+#[allow(dead_code)]
 pub type ProgressCallback = Box<dyn FnMut(&str, usize, usize)>;
 
 /// Main processing pipeline for semantic keyframe extraction.

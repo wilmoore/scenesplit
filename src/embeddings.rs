@@ -23,6 +23,7 @@ impl EmbeddedFrame {
     }
 
     /// Frame timestamp in seconds.
+    #[allow(dead_code)]
     pub fn timestamp_seconds(&self) -> f64 {
         self.frame.timestamp_seconds
     }
@@ -107,6 +108,7 @@ impl EmbeddingModel {
     }
 
     /// Compute the embedding for a single frame.
+    #[allow(dead_code)]
     pub fn compute_embedding(&mut self, frame: &Frame) -> Result<EmbeddedFrame> {
         let input = self.preprocess_frame(frame)?;
         let input_value = ort::value::Tensor::from_array(input)?;
@@ -118,7 +120,7 @@ impl EmbeddingModel {
             .map_err(|e| Error::Embedding(format!("Failed to extract embedding: {}", e)))?;
 
         // Flatten and normalize
-        let flat: Vec<f32> = data.iter().cloned().collect();
+        let flat: Vec<f32> = data.to_vec();
         let embedding = normalize_vector(&flat);
 
         Ok(EmbeddedFrame {
@@ -143,7 +145,7 @@ impl EmbeddingModel {
         let batch_size = self.quality.embedding_batch_size();
         let mut results = Vec::with_capacity(frames.len());
 
-        for (batch_idx, chunk) in frames.chunks(batch_size).enumerate() {
+        for chunk in frames.chunks(batch_size) {
             // Process batch
             let mut batch_tensor = Array4::<f32>::zeros((chunk.len(), 3, 224, 224));
 
@@ -167,8 +169,13 @@ impl EmbeddingModel {
             // Extract individual embeddings from batch output
             for (i, frame) in chunk.iter().enumerate() {
                 let start = i * embedding_size;
-                let end = start + embedding_size;
-                let flat: Vec<f32> = data.iter().skip(start).take(embedding_size).cloned().collect();
+                let _end = start + embedding_size;
+                let flat: Vec<f32> = data
+                    .iter()
+                    .skip(start)
+                    .take(embedding_size)
+                    .cloned()
+                    .collect();
                 let embedding = normalize_vector(&flat);
 
                 results.push(EmbeddedFrame {

@@ -21,3 +21,4 @@ We use the [Michael Nygard format](https://cognitect.com/blog/2011/11/15/documen
 - [001. Use Rust for Implementation](001-use-rust-for-implementation.md)
 - [002. Use ONNX Runtime for ML Inference](002-use-onnx-runtime-for-ml-inference.md)
 - [003. Auto-Download Model on First Run](003-auto-download-model-on-first-run.md)
+- [004. Use GitHub Actions for Releases](004-github-actions-for-releases.md)
