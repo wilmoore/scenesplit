@@ -1,5 +1,5 @@
 {
-  "lastSequence": 3,
+  "lastSequence": 4,
   "entries": [
     {
       "branch": "mvp/scenesplit",
@@ -7,6 +7,12 @@
         "001-use-rust-for-implementation.md",
         "002-use-onnx-runtime-for-ml-inference.md",
         "003-auto-download-model-on-first-run.md"
+      ]
+    },
+    {
+      "branch": "feat/metadata-and-packaging",
+      "adrs": [
+        "004-github-actions-for-releases.md"
       ]
     }
   ]
