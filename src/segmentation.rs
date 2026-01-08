@@ -108,7 +108,7 @@ impl SemanticSegmenter {
         &self,
         index: usize,
         frames: &[&EmbeddedFrame],
-        start_idx: usize,
+        _start_idx: usize,
     ) -> SemanticSegment {
         // Select middle frame as representative (deterministic selection)
         let representative_idx = frames.len() / 2;

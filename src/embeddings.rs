@@ -118,7 +118,7 @@ impl EmbeddingModel {
             .map_err(|e| Error::Embedding(format!("Failed to extract embedding: {}", e)))?;
 
         // Flatten and normalize
-        let flat: Vec<f32> = data.iter().cloned().collect();
+        let flat: Vec<f32> = data.to_vec();
         let embedding = normalize_vector(&flat);
 
         Ok(EmbeddedFrame {

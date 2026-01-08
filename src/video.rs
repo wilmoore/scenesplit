@@ -164,7 +164,7 @@ impl VideoLoader {
             }
 
             // Only process frames at the sample rate
-            if frame_index % sample_rate == 0 {
+            if frame_index.is_multiple_of(sample_rate) {
                 let timestamp = if fps > 0.0 {
                     frame_index as f64 / fps
                 } else {
