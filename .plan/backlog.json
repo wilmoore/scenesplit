@@ -76,9 +76,10 @@
       "fingerprint": "spec|spec-001|epic|e005-metadata-output",
       "source": "/pro:spec.import",
       "sourceSpec": "spec-001",
-      "sourceBranch": null,
+      "sourceBranch": "feat/metadata-and-packaging",
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "status": "open"
+      "status": "resolved",
+      "resolvedAt": "2026-01-07T00:00:00.000Z"
     },
     {
       "id": 6,
@@ -91,9 +92,10 @@
       "fingerprint": "spec|spec-001|epic|e006-packaging",
       "source": "/pro:spec.import",
       "sourceSpec": "spec-001",
-      "sourceBranch": null,
+      "sourceBranch": "feat/metadata-and-packaging",
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "status": "open"
+      "status": "resolved",
+      "resolvedAt": "2026-01-07T00:00:00.000Z"
     },
     {
       "id": 7,
@@ -201,9 +203,10 @@
       "fingerprint": "spec|spec-001|story|us006-metadata",
       "source": "/pro:spec.import",
       "sourceSpec": "spec-001",
-      "sourceBranch": null,
+      "sourceBranch": "feat/metadata-and-packaging",
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "status": "open"
+      "status": "resolved",
+      "resolvedAt": "2026-01-07T00:00:00.000Z"
     }
   ]
 }
