@@ -96,12 +96,7 @@ fn run(args: Args) -> Result<(), Error> {
         println!();
     }
 
-    let processor = SceneSplitProcessor::new(
-        args.detail,
-        args.quality,
-        args.output,
-        model_path,
-    );
+    let processor = SceneSplitProcessor::new(args.detail, args.quality, args.output, model_path);
 
     let callback = if args.quiet {
         None
