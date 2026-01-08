@@ -2,9 +2,10 @@
 
 Extract semantically distinct still images from video.
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Rust](https://img.shields.io/badge/rust-2021-orange.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+[![CI](https://github.com/wilmoore/scenesplit/actions/workflows/ci.yml/badge.svg)](https://github.com/wilmoore/scenesplit/actions/workflows/ci.yml)
+[![Crates.io](https://img.shields.io/crates/v/scenesplit.svg)](https://crates.io/crates/scenesplit)
+[![Downloads](https://img.shields.io/crates/d/scenesplit.svg)](https://crates.io/crates/scenesplit)
+[![License](https://img.shields.io/crates/l/scenesplit.svg)](https://github.com/wilmoore/scenesplit/blob/main/LICENSE)
 
 ---
 
@@ -38,6 +39,12 @@ sudo apt install libopencv-dev
 ```
 
 ## Installation
+
+### From crates.io
+
+```bash
+cargo install scenesplit
+```
 
 ### Pre-built Binaries
 
