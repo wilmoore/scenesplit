@@ -145,7 +145,7 @@ impl EmbeddingModel {
         let batch_size = self.quality.embedding_batch_size();
         let mut results = Vec::with_capacity(frames.len());
 
-        for (_batch_idx, chunk) in frames.chunks(batch_size).enumerate() {
+        for chunk in frames.chunks(batch_size) {
             // Process batch
             let mut batch_tensor = Array4::<f32>::zeros((chunk.len(), 3, 224, 224));
 
