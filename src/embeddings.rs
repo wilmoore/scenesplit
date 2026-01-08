@@ -168,7 +168,12 @@ impl EmbeddingModel {
             for (i, frame) in chunk.iter().enumerate() {
                 let start = i * embedding_size;
                 let end = start + embedding_size;
-                let flat: Vec<f32> = data.iter().skip(start).take(embedding_size).cloned().collect();
+                let flat: Vec<f32> = data
+                    .iter()
+                    .skip(start)
+                    .take(embedding_size)
+                    .cloned()
+                    .collect();
                 let embedding = normalize_vector(&flat);
 
                 results.push(EmbeddedFrame {
