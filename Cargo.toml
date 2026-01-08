@@ -1,6 +1,6 @@
 [package]
 name = "scenesplit"
-version = "1.1.0"
+version = "1.1.1"
 edition = "2021"
 authors = ["SceneSplit Team"]
 description = "Offline CLI tool that extracts semantically distinct still images from video"
