@@ -76,7 +76,8 @@ impl SemanticSegmenter {
 
             if is_semantic_change && has_min_frames {
                 // Finalize current segment
-                let segment = self.create_segment(segments.len(), &segment_frames, segment_start_idx);
+                let segment =
+                    self.create_segment(segments.len(), &segment_frames, segment_start_idx);
                 segments.push(segment);
 
                 // Start new segment
@@ -86,8 +87,7 @@ impl SemanticSegmenter {
             } else {
                 segment_frames.push(current_frame);
                 // Update anchor using exponential moving average
-                anchor_embedding =
-                    self.update_anchor(&anchor_embedding, &current_frame.embedding);
+                anchor_embedding = self.update_anchor(&anchor_embedding, &current_frame.embedding);
             }
 
             if let Some(ref mut cb) = progress_callback {
