@@ -12,6 +12,7 @@ use crate::error::{Error, Result, SUPPORTED_FORMATS};
 
 /// Metadata extracted from a video file.
 #[derive(Debug, Clone)]
+#[allow(dead_code)]
 pub struct VideoMetadata {
     pub path: PathBuf,
     pub width: u32,
@@ -34,6 +35,7 @@ pub struct Frame {
 
 impl Frame {
     /// Timestamp in milliseconds.
+    #[allow(dead_code)]
     pub fn timestamp_ms(&self) -> u64 {
         (self.timestamp_seconds * 1000.0) as u64
     }
@@ -208,6 +210,7 @@ impl VideoLoader {
     }
 
     /// Get a specific frame by index.
+    #[allow(dead_code)]
     pub fn get_frame_at(&mut self, index: usize) -> Result<Frame> {
         let metadata = self.metadata()?.clone();
 
@@ -264,6 +267,7 @@ impl VideoLoader {
     }
 
     /// Get the path to the video file.
+    #[allow(dead_code)]
     pub fn path(&self) -> &Path {
         &self.path
     }

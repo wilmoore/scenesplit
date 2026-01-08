@@ -114,6 +114,7 @@ fn download_model(url: &str, dest: &PathBuf, quiet: bool) -> Result<()> {
 }
 
 /// Get the path where the model would be cached (for display purposes).
+#[allow(dead_code)]
 pub fn model_cache_path() -> Option<PathBuf> {
     cache_dir().ok().map(|c| c.join(MODEL_FILENAME))
 }

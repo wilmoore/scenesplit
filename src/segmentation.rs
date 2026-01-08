@@ -5,6 +5,7 @@ use crate::embeddings::{cosine_similarity, EmbeddedFrame};
 
 /// A segment of semantically similar frames.
 #[derive(Debug, Clone)]
+#[allow(dead_code)]
 pub struct SemanticSegment {
     pub index: usize,
     pub start_frame_idx: usize,
@@ -15,11 +16,13 @@ pub struct SemanticSegment {
 
 impl SemanticSegment {
     /// Start timestamp in seconds.
+    #[allow(dead_code)]
     pub fn start_timestamp(&self) -> f64 {
         self.representative_frame.timestamp_seconds()
     }
 
     /// Duration of segment in frames.
+    #[allow(dead_code)]
     pub fn duration_frames(&self) -> usize {
         self.end_frame_idx - self.start_frame_idx
     }
@@ -144,6 +147,7 @@ impl SemanticSegmenter {
 }
 
 /// Select representative frames from segments in deterministic order.
+#[allow(dead_code)]
 pub fn deterministic_frame_selection(segments: &[SemanticSegment]) -> Vec<&EmbeddedFrame> {
     let mut sorted_segments: Vec<_> = segments.iter().collect();
     sorted_segments.sort_by_key(|s| s.index);
