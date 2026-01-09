@@ -2,7 +2,7 @@
 
 use std::path::{Path, PathBuf};
 
-use opencv::core::{AlgorithmHint, Mat};
+use opencv::core::Mat;
 use opencv::imgproc;
 use opencv::prelude::*;
 use opencv::videoio::{self, VideoCapture, VideoCaptureTraitConst};
@@ -175,13 +175,7 @@ impl VideoLoader {
 
                 // Convert BGR to RGB
                 let mut rgb_mat = Mat::default();
-                imgproc::cvt_color(
-                    &frame_mat,
-                    &mut rgb_mat,
-                    imgproc::COLOR_BGR2RGB,
-                    0,
-                    AlgorithmHint::ALGO_HINT_DEFAULT,
-                )?;
+                imgproc::cvt_color_def(&frame_mat, &mut rgb_mat, imgproc::COLOR_BGR2RGB)?;
 
                 // Get frame dimensions
                 let width = rgb_mat.cols() as u32;
@@ -245,13 +239,7 @@ impl VideoLoader {
 
         // Convert BGR to RGB
         let mut rgb_mat = Mat::default();
-        imgproc::cvt_color(
-            &frame_mat,
-            &mut rgb_mat,
-            imgproc::COLOR_BGR2RGB,
-            0,
-            AlgorithmHint::ALGO_HINT_DEFAULT,
-        )?;
+        imgproc::cvt_color_def(&frame_mat, &mut rgb_mat, imgproc::COLOR_BGR2RGB)?;
 
         let width = rgb_mat.cols() as u32;
         let height = rgb_mat.rows() as u32;

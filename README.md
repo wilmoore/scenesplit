@@ -3,7 +3,7 @@
 Extract semantically distinct still images from video.
 
 [![CI](https://github.com/wilmoore/scenesplit/actions/workflows/ci.yml/badge.svg)](https://github.com/wilmoore/scenesplit/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/version-1.1.1-green.svg)](https://github.com/wilmoore/scenesplit/releases)
+[![Version](https://img.shields.io/badge/version-1.1.2-green.svg)](https://github.com/wilmoore/scenesplit/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wilmoore/scenesplit/blob/main/LICENSE)
 [![Rust](https://img.shields.io/badge/rust-2021_edition-orange.svg)](https://www.rust-lang.org/)
 
