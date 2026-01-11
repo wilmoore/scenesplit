@@ -3,7 +3,7 @@
 Extract semantically distinct still images from video.
 
 [![CI](https://github.com/wilmoore/scenesplit/actions/workflows/ci.yml/badge.svg)](https://github.com/wilmoore/scenesplit/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/version-1.1.3-green.svg)](https://github.com/wilmoore/scenesplit/releases)
+[![Version](https://img.shields.io/badge/version-1.1.4-green.svg)](https://github.com/wilmoore/scenesplit/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wilmoore/scenesplit/blob/main/LICENSE)
 [![Rust](https://img.shields.io/badge/rust-2021_edition-orange.svg)](https://www.rust-lang.org/)
 
@@ -53,7 +53,6 @@ Download the latest release for your platform from [Releases](https://github.com
 | Platform | File |
 |----------|------|
 | macOS (Apple Silicon) | `scenesplit-macos-arm64.tar.gz` |
-| macOS (Intel) | `scenesplit-macos-x64.tar.gz` |
 | Linux (x64) | `scenesplit-linux-x64.tar.gz` |
 
 ```bash
@@ -61,14 +60,12 @@ Download the latest release for your platform from [Releases](https://github.com
 curl -L https://github.com/wilmoore/scenesplit/releases/latest/download/scenesplit-macos-arm64.tar.gz | tar xz
 sudo mv scenesplit /usr/local/bin/
 
-# macOS (Intel)
-curl -L https://github.com/wilmoore/scenesplit/releases/latest/download/scenesplit-macos-x64.tar.gz | tar xz
-sudo mv scenesplit /usr/local/bin/
-
 # Linux
 curl -L https://github.com/wilmoore/scenesplit/releases/latest/download/scenesplit-linux-x64.tar.gz | tar xz
 sudo mv scenesplit /usr/local/bin/
 ```
+
+> **Note:** Intel Mac users can run the ARM64 binary via Rosetta 2 or build from source.
 
 ### Build from Source
 
